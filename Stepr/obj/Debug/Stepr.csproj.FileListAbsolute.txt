@@ -9,3 +9,14 @@ C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\Stepr\obj\Debug\Step
 C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\Stepr\obj\Debug\Stepr.exe
 C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\Stepr\obj\Debug\Stepr.pdb
 C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\Stepr\obj\Debug\Stepr.Form2.resources
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\bin\Debug\Stepr.exe.config
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\bin\Debug\Stepr.exe
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\bin\Debug\Stepr.pdb
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.csproj.AssemblyReference.cache
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.Form1.resources
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.Form2.resources
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.Properties.Resources.resources
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.csproj.GenerateResource.cache
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.csproj.CoreCompileInputs.cache
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.exe
+C:\Users\chunga2\Documents\Programming (non OneDrive)\Stepr\stepr-screenshot-tool\Stepr\obj\Debug\Stepr.pdb

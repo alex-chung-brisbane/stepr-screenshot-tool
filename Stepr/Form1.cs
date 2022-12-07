@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Stepr
@@ -18,7 +19,9 @@ namespace Stepr
         private IDictionary<ToolStripTextBox, string> defaultSettings = new Dictionary<ToolStripTextBox, string>();
 
         private int curTool = -1;
+        private bool isDragging = false;
 
+        private int[] dragTools = { 2, 3, 4, 5, 6};
         private string[] tools = {
             "Label [ # ]",
             "Label [ T ]",
@@ -132,6 +135,7 @@ namespace Stepr
         {
             curTool = toolID;
             tsmi_tools.Text = "Selected tool: " + tools[toolID];
+            isDragging = false;
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -224,7 +228,7 @@ namespace Stepr
                 case 1:
 
                     labelSize = TextRenderer.MeasureText(tstb_label_text.Text, curFont).Width;
-                    rectf = new RectangleF(e.Location.X, e.Location.Y - int.Parse(tstb_size_font.Text), labelSize, int.Parse(tstb_size_font.Text) * 2);
+                    rectf = new RectangleF(e.Location.X, e.Location.Y - int.Parse(tstb_size_font.Text), labelSize + 5, int.Parse(tstb_size_font.Text) * 2);
                     strFormat = new StringFormat()
                     {
                         Alignment = StringAlignment.Near,
@@ -238,6 +242,8 @@ namespace Stepr
                 default:
                     break;
             }
+
+            g.Dispose();
 
             RefreshEditor(workingBmp);
         }
@@ -255,6 +261,43 @@ namespace Stepr
         private void tsmi_use_label_text_Click(object sender, EventArgs e)
         {
             ChangeTool(1);
+        }
+
+        private void pb_edit_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && dragTools.Contains(curTool))
+            {
+                isDragging = true;
+            }
+        }
+
+        private void pb_edit_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isDragging = false;
+            }
+        }
+
+        private void pb_edit_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (activeBmp == null || isDragging == false) return;
+
+            UpdateWorkingBmp();
+            Graphics g = Graphics.FromImage(workingBmp);
+
+            switch (curTool)
+            {
+                case 2:
+
+                    break;
+                default:
+                    break;
+            }
+
+            g.Dispose();
+
+            RefreshEditor(workingBmp);
         }
     }
 }
