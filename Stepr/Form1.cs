@@ -20,16 +20,16 @@ namespace Stepr
 
         private int curTool = -1;
         private bool isDragging = false;
+        private Point startDrag;
 
-        private int[] dragTools = { 2, 3, 4, 5, 6};
+        private int[] dragTools = { 2, 3, 4, 5 };
         private string[] tools = {
             "Label [ # ]",
             "Label [ T ]",
             "Rect (out)",
             "Rect (fill)",
             "Circle",
-            "Line",
-            "Blur"
+            "Line"
         };
 
         public Form1()
@@ -126,11 +126,6 @@ namespace Stepr
             ChangeTool(5);
         }
 
-        private void tsmi_blur_Click(object sender, EventArgs e)
-        {
-            ChangeTool(6);
-        }
-
         private void ChangeTool(int toolID)
         {
             curTool = toolID;
@@ -220,7 +215,6 @@ namespace Stepr
                     };
                     g.FillEllipse(new SolidBrush((Color)colConverter.ConvertFromString(tstb_color_back.Text)), rectf);
                     g.DrawString(tstb_label_num.Text, curFont, new SolidBrush((Color)colConverter.ConvertFromString(tstb_color_fore.Text)), rectf, strFormat);
-                    g.Flush();
 
                     tstb_label_num.Text = (int.Parse(tstb_label_num.Text) + 1).ToString();
 
@@ -236,13 +230,13 @@ namespace Stepr
                     };
                     g.FillRectangle(new SolidBrush((Color)colConverter.ConvertFromString(tstb_color_back.Text)), rectf);
                     g.DrawString(tstb_label_text.Text, curFont, new SolidBrush((Color)colConverter.ConvertFromString(tstb_color_fore.Text)), rectf, strFormat);
-                    g.Flush();
 
                     break;
                 default:
                     break;
             }
 
+            g.Flush();
             g.Dispose();
 
             RefreshEditor(workingBmp);
@@ -267,6 +261,8 @@ namespace Stepr
         {
             if (e.Button == MouseButtons.Left && dragTools.Contains(curTool))
             {
+                startDrag = e.Location;
+                UpdateWorkingBmp();
                 isDragging = true;
             }
         }
@@ -276,6 +272,7 @@ namespace Stepr
             if (e.Button == MouseButtons.Left)
             {
                 isDragging = false;
+                UpdateWorkingBmp();
             }
         }
 
@@ -283,21 +280,42 @@ namespace Stepr
         {
             if (activeBmp == null || isDragging == false) return;
 
-            UpdateWorkingBmp();
-            Graphics g = Graphics.FromImage(workingBmp);
+            Bitmap cacheBmp = (Bitmap)workingBmp.Clone();
+
+            Graphics g = Graphics.FromImage(cacheBmp);
 
             switch (curTool)
             {
                 case 2:
+
+                    g.DrawRectangle(new Pen((Color)colConverter.ConvertFromString(tstb_color_back.Text), int.Parse(tstb_size_thick.Text)), new Rectangle(startDrag, new Size(e.Location.X - startDrag.X, e.Location.Y - startDrag.Y)));
+                    
+                    break;
+                case 3:
+
+                    g.FillRectangle(new SolidBrush((Color)colConverter.ConvertFromString(tstb_color_back.Text)), new Rectangle(startDrag, new Size(e.Location.X - startDrag.X, e.Location.Y - startDrag.Y)));
+
+                    break;
+                case 4:
+
+                    g.DrawEllipse(new Pen((Color)colConverter.ConvertFromString(tstb_color_back.Text), int.Parse(tstb_size_thick.Text)), new Rectangle(startDrag, new Size(e.Location.X - startDrag.X, e.Location.Y - startDrag.Y)));
+
+                    break;
+                case 5:
+
+                    g.DrawLine(new Pen((Color)colConverter.ConvertFromString(tstb_color_back.Text), int.Parse(tstb_size_thick.Text)), startDrag, e.Location);
 
                     break;
                 default:
                     break;
             }
 
+            g.Flush();
             g.Dispose();
 
-            RefreshEditor(workingBmp);
+            RefreshEditor(cacheBmp);
+
+            cacheBmp.Dispose();
         }
     }
 }

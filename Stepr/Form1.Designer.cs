@@ -51,8 +51,6 @@ namespace Stepr
             this.tsmi_rect_filled = new System.Windows.Forms.ToolStripMenuItem();
             this.circleoutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_line = new System.Windows.Forms.ToolStripMenuItem();
-            this.tss_extra = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmi_blur = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_settings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_heading_color_fore = new System.Windows.Forms.ToolStripMenuItem();
             this.tstb_color_fore = new System.Windows.Forms.ToolStripTextBox();
@@ -168,9 +166,7 @@ namespace Stepr
             this.tsmi_rect_outline,
             this.tsmi_rect_filled,
             this.circleoutlineToolStripMenuItem,
-            this.tsmi_line,
-            this.tss_extra,
-            this.tsmi_blur});
+            this.tsmi_line});
             this.tsmi_tools.Name = "tsmi_tools";
             this.tsmi_tools.Size = new System.Drawing.Size(154, 24);
             this.tsmi_tools.Text = "Selected tool: None";
@@ -264,19 +260,6 @@ namespace Stepr
             this.tsmi_line.Size = new System.Drawing.Size(269, 26);
             this.tsmi_line.Text = "Line";
             this.tsmi_line.Click += new System.EventHandler(this.tsmi_line_Click);
-            // 
-            // tss_extra
-            // 
-            this.tss_extra.Name = "tss_extra";
-            this.tss_extra.Size = new System.Drawing.Size(266, 6);
-            // 
-            // tsmi_blur
-            // 
-            this.tsmi_blur.Name = "tsmi_blur";
-            this.tsmi_blur.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
-            this.tsmi_blur.Size = new System.Drawing.Size(269, 26);
-            this.tsmi_blur.Text = "Blur (censor)";
-            this.tsmi_blur.Click += new System.EventHandler(this.tsmi_blur_Click);
             // 
             // tsmi_settings
             // 
@@ -468,10 +451,8 @@ namespace Stepr
         private System.Windows.Forms.ToolStripMenuItem tsmi_rect_filled;
         private System.Windows.Forms.ToolStripMenuItem circleoutlineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmi_line;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_blur;
         private System.Windows.Forms.ToolStripMenuItem tsmi_settings;
         private System.Windows.Forms.ToolStripSeparator tss_shapes;
-        private System.Windows.Forms.ToolStripSeparator tss_extra;
         private System.Windows.Forms.ToolStripMenuItem tsmi_heading_color_fore;
         private System.Windows.Forms.ToolStripMenuItem tsmi_heading_color_back;
         private System.Windows.Forms.ToolStripSeparator tss_sizes;
