@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,6 +14,7 @@ namespace Stepr
         public Bitmap activeBmp;
         public Bitmap clearBmp;
         private Bitmap workingBmp;
+        private Bitmap prevBmp;
 
         private ColorConverter colConverter = new ColorConverter();
 
@@ -161,12 +163,9 @@ namespace Stepr
 
         private void tsmi_copy_Click(object sender, EventArgs e)
         {
-            Clipboard.SetImage(activeBmp);
-        }
+            if (activeBmp == null) return;
 
-        private void tsmi_clear_Click(object sender, EventArgs e)
-        {
-            RefreshEditor(clearBmp);
+            Clipboard.SetImage(activeBmp);
         }
 
         public void RefreshEditor(Bitmap updatedBmp)
@@ -176,6 +175,8 @@ namespace Stepr
             if (!isDragging && activeBmp != null)
             {
                 Console.WriteLine("Called.");
+                if (prevBmp != null) prevBmp.Dispose();
+                prevBmp = (Bitmap)workingBmp.Clone();
             }
 
             if (activeBmp != null) activeBmp.Dispose();
@@ -185,6 +186,7 @@ namespace Stepr
 
         public void UpdateWorkingBmp()
         {
+            Console.WriteLine("Working updated.");
             workingBmp = (Bitmap)activeBmp.Clone();
         }
 
@@ -192,14 +194,14 @@ namespace Stepr
         {
             if (activeBmp == null || !(curTool == 0 || curTool == 1)) return;
 
-            UpdateWorkingBmp();
+            Bitmap cacheBmp = (Bitmap)workingBmp.Clone();
 
             Font curFont = new Font("Tahoma", int.Parse(tstb_size_font.Text), FontStyle.Bold);
             int labelSize;
             RectangleF rectf;
             StringFormat strFormat;
 
-            Graphics g = Graphics.FromImage(workingBmp);
+            Graphics g = Graphics.FromImage(cacheBmp);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -242,7 +244,11 @@ namespace Stepr
             g.Flush();
             g.Dispose();
 
-            RefreshEditor(workingBmp);
+            RefreshEditor(cacheBmp);
+
+            UpdateWorkingBmp();
+
+            cacheBmp.Dispose();
         }
 
         private void tstb_label_num_TextChanged(object sender, EventArgs e)
@@ -275,8 +281,11 @@ namespace Stepr
             if (e.Button == MouseButtons.Left && isDragging)
             {
                 isDragging = false;
-                UpdateWorkingBmp();
+                Bitmap tmpBmp = (Bitmap)activeBmp.Clone();
                 RefreshEditor(workingBmp);
+                RefreshEditor(tmpBmp);
+                UpdateWorkingBmp();
+                tmpBmp.Dispose();
             }
         }
 
@@ -324,7 +333,28 @@ namespace Stepr
 
         private void tsmi_undo_Click(object sender, EventArgs e)
         {
+            if (prevBmp == null) return;
 
+            RefreshEditor((Bitmap)prevBmp.Clone());
+            UpdateWorkingBmp();
+        }
+
+        private void tsmi_save_Click(object sender, EventArgs e)
+        {
+            if (activeBmp == null) return;
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JPEG images (*.jpg)|*.jpg";
+            dialog.FileName = "Annotated screenshot";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                activeBmp.Save(dialog.FileName, ImageFormat.Jpeg);
+            }
+        }
+
+        private void tsmi_reset_label_num_Click(object sender, EventArgs e)
+        {
+            tstb_label_num.Text = "1";
         }
     }
 }

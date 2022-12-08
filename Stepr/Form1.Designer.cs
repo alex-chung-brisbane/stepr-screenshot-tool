@@ -37,7 +37,6 @@ namespace Stepr
             this.tsmi_save = new System.Windows.Forms.ToolStripMenuItem();
             this.tss_history = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_undo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_clear = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_tools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_label_num = new System.Windows.Forms.ToolStripMenuItem();
             this.tstb_label_num = new System.Windows.Forms.ToolStripTextBox();
@@ -67,6 +66,7 @@ namespace Stepr
             this.pnl_viewport = new System.Windows.Forms.Panel();
             this.pb_edit = new System.Windows.Forms.PictureBox();
             this.lbl_info = new System.Windows.Forms.Label();
+            this.tsmi_reset_label_num = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_toolbar.SuspendLayout();
             this.pnl_viewport.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_edit)).BeginInit();
@@ -81,7 +81,7 @@ namespace Stepr
             this.tsmi_settings});
             this.ms_toolbar.Location = new System.Drawing.Point(0, 0);
             this.ms_toolbar.Name = "ms_toolbar";
-            this.ms_toolbar.Size = new System.Drawing.Size(1657, 28);
+            this.ms_toolbar.Size = new System.Drawing.Size(1657, 30);
             this.ms_toolbar.TabIndex = 0;
             this.ms_toolbar.Text = "menuStrip1";
             // 
@@ -93,10 +93,9 @@ namespace Stepr
             this.tsmi_copy,
             this.tsmi_save,
             this.tss_history,
-            this.tsmi_undo,
-            this.tsmi_clear});
+            this.tsmi_undo});
             this.tsmi_new.Name = "tsmi_new";
-            this.tsmi_new.Size = new System.Drawing.Size(46, 24);
+            this.tsmi_new.Size = new System.Drawing.Size(46, 26);
             this.tsmi_new.Text = "File";
             // 
             // tsmi_clip
@@ -126,6 +125,7 @@ namespace Stepr
             this.tsmi_save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.tsmi_save.Size = new System.Drawing.Size(299, 26);
             this.tsmi_save.Text = "Save to file";
+            this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
             // 
             // tss_history
             // 
@@ -140,14 +140,6 @@ namespace Stepr
             this.tsmi_undo.Text = "Undo/Redo last change";
             this.tsmi_undo.Click += new System.EventHandler(this.tsmi_undo_Click);
             // 
-            // tsmi_clear
-            // 
-            this.tsmi_clear.Name = "tsmi_clear";
-            this.tsmi_clear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
-            this.tsmi_clear.Size = new System.Drawing.Size(299, 26);
-            this.tsmi_clear.Text = "Clear all edits";
-            this.tsmi_clear.Click += new System.EventHandler(this.tsmi_clear_Click);
-            // 
             // tsmi_tools
             // 
             this.tsmi_tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -159,13 +151,14 @@ namespace Stepr
             this.circleoutlineToolStripMenuItem,
             this.tsmi_line});
             this.tsmi_tools.Name = "tsmi_tools";
-            this.tsmi_tools.Size = new System.Drawing.Size(154, 24);
+            this.tsmi_tools.Size = new System.Drawing.Size(154, 26);
             this.tsmi_tools.Text = "Selected tool: None";
             // 
             // tsmi_label_num
             // 
             this.tsmi_label_num.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tstb_label_num,
+            this.tsmi_reset_label_num,
             this.tsmi_use_label_num});
             this.tsmi_label_num.Name = "tsmi_label_num";
             this.tsmi_label_num.Size = new System.Drawing.Size(269, 26);
@@ -185,7 +178,7 @@ namespace Stepr
             // 
             this.tsmi_use_label_num.Name = "tsmi_use_label_num";
             this.tsmi_use_label_num.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.tsmi_use_label_num.Size = new System.Drawing.Size(193, 26);
+            this.tsmi_use_label_num.Size = new System.Drawing.Size(224, 26);
             this.tsmi_use_label_num.Text = "Use tool";
             this.tsmi_use_label_num.Click += new System.EventHandler(this.tsmi_use_label_num_Click);
             // 
@@ -263,7 +256,7 @@ namespace Stepr
             this.tss_reset,
             this.tsmi_default});
             this.tsmi_settings.Name = "tsmi_settings";
-            this.tsmi_settings.Size = new System.Drawing.Size(76, 24);
+            this.tsmi_settings.Size = new System.Drawing.Size(76, 26);
             this.tsmi_settings.Text = "Settings";
             // 
             // tsmi_heading_color_fore
@@ -406,6 +399,14 @@ namespace Stepr
             this.lbl_info.Text = "Start by making a new clip (Ctrl+N) - Make sure your cursor is on the same monito" +
     "r as where you\'re trying to capture";
             // 
+            // tsmi_reset_label_num
+            // 
+            this.tsmi_reset_label_num.Name = "tsmi_reset_label_num";
+            this.tsmi_reset_label_num.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
+            this.tsmi_reset_label_num.Size = new System.Drawing.Size(224, 26);
+            this.tsmi_reset_label_num.Text = "Reset to 1";
+            this.tsmi_reset_label_num.Click += new System.EventHandler(this.tsmi_reset_label_num_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -465,11 +466,11 @@ namespace Stepr
         private System.Windows.Forms.Panel pnl_viewport;
         private System.Windows.Forms.PictureBox pb_edit;
         private System.Windows.Forms.Label lbl_info;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_clear;
         private System.Windows.Forms.ToolStripTextBox tstb_label_num;
         private System.Windows.Forms.ToolStripTextBox tstb_label_text;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_label_num;
         private System.Windows.Forms.ToolStripMenuItem tsmi_use_label_text;
+        private System.Windows.Forms.ToolStripMenuItem tsmi_reset_label_num;
     }
 }
 
