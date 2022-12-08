@@ -169,18 +169,21 @@ namespace Stepr
             RefreshEditor(clearBmp);
         }
 
-        private void RefreshEditor(Bitmap updatedBmp)
+        public void RefreshEditor(Bitmap updatedBmp)
         {
             if (updatedBmp == null) return;
 
-            // TODO: Handle history
+            if (!isDragging && activeBmp != null)
+            {
+                Console.WriteLine("Called.");
+            }
 
-            activeBmp.Dispose();
+            if (activeBmp != null) activeBmp.Dispose();
             activeBmp = (Bitmap)updatedBmp.Clone();
             pb_edit.Invalidate();
         }
 
-        private void UpdateWorkingBmp()
+        public void UpdateWorkingBmp()
         {
             workingBmp = (Bitmap)activeBmp.Clone();
         }
@@ -269,10 +272,11 @@ namespace Stepr
 
         private void pb_edit_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Left && isDragging)
             {
                 isDragging = false;
                 UpdateWorkingBmp();
+                RefreshEditor(workingBmp);
             }
         }
 
@@ -316,6 +320,11 @@ namespace Stepr
             RefreshEditor(cacheBmp);
 
             cacheBmp.Dispose();
+        }
+
+        private void tsmi_undo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

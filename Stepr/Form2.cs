@@ -92,8 +92,9 @@ namespace Stepr
 
             this.Hide();
 
-            parentForm.activeBmp = CaptureScreen(startPoint.X, startPoint.Y, pnl_quad_top_left.Width, pnl_quad_top_left.Height);
+            parentForm.RefreshEditor(CaptureScreen(startPoint.X, startPoint.Y, pnl_quad_top_left.Width, pnl_quad_top_left.Height));
             parentForm.clearBmp = (Bitmap)parentForm.activeBmp.Clone();
+            parentForm.UpdateWorkingBmp();
             parentForm.DisablePrompt();
 
             this.Close();

@@ -37,7 +37,6 @@ namespace Stepr
             this.tsmi_save = new System.Windows.Forms.ToolStripMenuItem();
             this.tss_history = new System.Windows.Forms.ToolStripSeparator();
             this.tsmi_undo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_redo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_clear = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_tools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_label_num = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +94,6 @@ namespace Stepr
             this.tsmi_save,
             this.tss_history,
             this.tsmi_undo,
-            this.tsmi_redo,
             this.tsmi_clear});
             this.tsmi_new.Name = "tsmi_new";
             this.tsmi_new.Size = new System.Drawing.Size(46, 24);
@@ -105,20 +103,20 @@ namespace Stepr
             // 
             this.tsmi_clip.Name = "tsmi_clip";
             this.tsmi_clip.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmi_clip.Size = new System.Drawing.Size(263, 26);
+            this.tsmi_clip.Size = new System.Drawing.Size(299, 26);
             this.tsmi_clip.Text = "Create clip";
             this.tsmi_clip.Click += new System.EventHandler(this.tsmi_clip_Click);
             // 
             // tss_export
             // 
             this.tss_export.Name = "tss_export";
-            this.tss_export.Size = new System.Drawing.Size(260, 6);
+            this.tss_export.Size = new System.Drawing.Size(296, 6);
             // 
             // tsmi_copy
             // 
             this.tsmi_copy.Name = "tsmi_copy";
             this.tsmi_copy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.tsmi_copy.Size = new System.Drawing.Size(263, 26);
+            this.tsmi_copy.Size = new System.Drawing.Size(299, 26);
             this.tsmi_copy.Text = "Copy to clipboard";
             this.tsmi_copy.Click += new System.EventHandler(this.tsmi_copy_Click);
             // 
@@ -126,34 +124,27 @@ namespace Stepr
             // 
             this.tsmi_save.Name = "tsmi_save";
             this.tsmi_save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmi_save.Size = new System.Drawing.Size(263, 26);
+            this.tsmi_save.Size = new System.Drawing.Size(299, 26);
             this.tsmi_save.Text = "Save to file";
             // 
             // tss_history
             // 
             this.tss_history.Name = "tss_history";
-            this.tss_history.Size = new System.Drawing.Size(260, 6);
+            this.tss_history.Size = new System.Drawing.Size(296, 6);
             // 
             // tsmi_undo
             // 
             this.tsmi_undo.Name = "tsmi_undo";
             this.tsmi_undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.tsmi_undo.Size = new System.Drawing.Size(263, 26);
-            this.tsmi_undo.Text = "Undo";
-            // 
-            // tsmi_redo
-            // 
-            this.tsmi_redo.Name = "tsmi_redo";
-            this.tsmi_redo.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Z)));
-            this.tsmi_redo.Size = new System.Drawing.Size(263, 26);
-            this.tsmi_redo.Text = "Redo";
+            this.tsmi_undo.Size = new System.Drawing.Size(299, 26);
+            this.tsmi_undo.Text = "Undo/Redo last change";
+            this.tsmi_undo.Click += new System.EventHandler(this.tsmi_undo_Click);
             // 
             // tsmi_clear
             // 
             this.tsmi_clear.Name = "tsmi_clear";
             this.tsmi_clear.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
-            this.tsmi_clear.Size = new System.Drawing.Size(263, 26);
+            this.tsmi_clear.Size = new System.Drawing.Size(299, 26);
             this.tsmi_clear.Text = "Clear all edits";
             this.tsmi_clear.Click += new System.EventHandler(this.tsmi_clear_Click);
             // 
@@ -194,7 +185,7 @@ namespace Stepr
             // 
             this.tsmi_use_label_num.Name = "tsmi_use_label_num";
             this.tsmi_use_label_num.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.tsmi_use_label_num.Size = new System.Drawing.Size(224, 26);
+            this.tsmi_use_label_num.Size = new System.Drawing.Size(193, 26);
             this.tsmi_use_label_num.Text = "Use tool";
             this.tsmi_use_label_num.Click += new System.EventHandler(this.tsmi_use_label_num_Click);
             // 
@@ -335,7 +326,7 @@ namespace Stepr
             // tsmi_info_size_thick
             // 
             this.tsmi_info_size_thick.Name = "tsmi_info_size_thick";
-            this.tsmi_info_size_thick.Size = new System.Drawing.Size(224, 26);
+            this.tsmi_info_size_thick.Size = new System.Drawing.Size(174, 26);
             this.tsmi_info_size_thick.Text = "(px)";
             // 
             // tsmi_heading_size_font
@@ -359,7 +350,7 @@ namespace Stepr
             // tsmi_info_size_font
             // 
             this.tsmi_info_size_font.Name = "tsmi_info_size_font";
-            this.tsmi_info_size_font.Size = new System.Drawing.Size(224, 26);
+            this.tsmi_info_size_font.Size = new System.Drawing.Size(174, 26);
             this.tsmi_info_size_font.Text = "(px)";
             // 
             // tss_reset
@@ -384,7 +375,7 @@ namespace Stepr
             this.pnl_viewport.Controls.Add(this.pb_edit);
             this.pnl_viewport.Controls.Add(this.lbl_info);
             this.pnl_viewport.Location = new System.Drawing.Point(16, 33);
-            this.pnl_viewport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnl_viewport.Margin = new System.Windows.Forms.Padding(4);
             this.pnl_viewport.Name = "pnl_viewport";
             this.pnl_viewport.Size = new System.Drawing.Size(1625, 871);
             this.pnl_viewport.TabIndex = 1;
@@ -393,7 +384,7 @@ namespace Stepr
             // 
             this.pb_edit.BackColor = System.Drawing.Color.Transparent;
             this.pb_edit.Location = new System.Drawing.Point(0, 0);
-            this.pb_edit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pb_edit.Margin = new System.Windows.Forms.Padding(4);
             this.pb_edit.Name = "pb_edit";
             this.pb_edit.Size = new System.Drawing.Size(1, 1);
             this.pb_edit.TabIndex = 0;
@@ -423,7 +414,7 @@ namespace Stepr
             this.Controls.Add(this.pnl_viewport);
             this.Controls.Add(this.ms_toolbar);
             this.MainMenuStrip = this.ms_toolbar;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Stepr - Advanced Screenshots";
@@ -470,7 +461,6 @@ namespace Stepr
         private System.Windows.Forms.ToolStripMenuItem tsmi_info_size_font;
         private System.Windows.Forms.ToolStripSeparator tss_history;
         private System.Windows.Forms.ToolStripMenuItem tsmi_undo;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_redo;
         private System.Windows.Forms.ToolStripSeparator tss_export;
         private System.Windows.Forms.Panel pnl_viewport;
         private System.Windows.Forms.PictureBox pb_edit;
